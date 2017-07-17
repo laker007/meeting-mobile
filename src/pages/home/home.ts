@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { NavController, IonicPage, ModalController } from 'ionic-angular';
+// import { CalendarModal } from './calendar-modal/calendar-modal';
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -7,8 +8,15 @@ import { NavController, IonicPage } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(
+    public navCtrl: NavController,
+    public modalCtrl: ModalController
+  ) {
 
   }
 
+  goCalendar() {
+    let calendarModal = this.modalCtrl.create('CalendarModal');
+    calendarModal.present();
+  }
 }

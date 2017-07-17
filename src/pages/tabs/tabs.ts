@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import * as moment from 'moment';
-
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 @Component({
   templateUrl: 'tabs.html'
 })

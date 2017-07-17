@@ -4,5 +4,6 @@ import { MinePage } from './mine';
 @NgModule({
   declarations: [MinePage],
   imports: [IonicPageModule.forChild(MinePage)],
+  exports: [MinePage]
 })
 export class MinePageModule { }
