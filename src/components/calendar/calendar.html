@@ -15,7 +15,19 @@
     <ion-col class="center calendar-header-col" *ngFor="let head of weekHead">{{head}}</ion-col>
   </ion-row>
 
-  <ion-row>
+  <ion-row class="calendar-row">
+    <ion-col class="center calendar-col" *ngFor="let item of items">
+        {{item}}
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="calendar-row">
+    <ion-col class="center calendar-col" *ngFor="let item of items">
+        {{item}}
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="calendar-row">
     <ion-col class="center calendar-col" *ngFor="let item of items">
         {{item}}
     </ion-col>

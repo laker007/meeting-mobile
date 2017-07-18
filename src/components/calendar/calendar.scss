@@ -6,21 +6,25 @@ ion-calendar {
     font-size: 1.2rem;
     color: #666;
   }
-  .calendar-col {
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
-    font-size: 1.8rem;
-    border-left: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+  .calendar-row {
     &:last-child {
-      border-right: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
     }
-    button {
-      span {
-        color: #000;
-        font-size: 1.6rem;
+    .calendar-col {
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
+      font-size: 1.8rem;
+      border-left: 1px solid #ccc;
+      border-top: 1px solid #ccc;
+      &:last-child {
+        border-right: 1px solid #ccc;
+      }
+      button {
+        span {
+          color: #000;
+          font-size: 1.6rem;
+        }
       }
     }
   }
