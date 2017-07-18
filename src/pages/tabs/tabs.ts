@@ -12,7 +12,7 @@ export class TabsPage {
   tab3Root = 'MinePage';
 
   constructor() {
-    let now = moment().format('LLLL');
+    let now = moment("2017-7-15","YYYY-MM-DD").week();
     console.log(now);
   }
 }
