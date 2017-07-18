@@ -1,23 +1,37 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar no-border-bottom>
+
+    <ion-buttons start>
+      <button ion-button clear>
+        预约
+      </button>
+    </ion-buttons>
+
     <ion-title>会议预约</ion-title>
-    
+
     <ion-buttons end>
-      <button ion-button icon-only (click)="goCalendar()">
-        <ion-icon ios="ios-calendar-outline" md="md-calendar"></ion-icon>
+      <button ion-button clear>
+        今天
       </button>
     </ion-buttons>
   </ion-navbar>
+
+  <!-- <ion-toolbar no-border-top>
+    <ion-row justify-content-center>
+      <ion-col col-auto>
+        <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+      </ion-col>
+      <ion-col col-auto>
+        <div>2017 年 7 月</div>
+      </ion-col>
+      <ion-col col-auto>
+        <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar> -->
+
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-calendar></ion-calendar>
 </ion-content>
