@@ -1,4 +1,5 @@
 ion-calendar {
+  font-family: "Microsoft YaHei";
   .center {
     text-align: center;
   }
@@ -21,12 +22,10 @@ ion-calendar {
       &:last-child {
         border-right: 1px solid #ccc;
       }
-      button {
-        span {
-          color: #000;
-          font-size: 1.6rem;
-        }
-      }
+    }
+    .not-this-month{
+      color: #fff;
+      background:linear-gradient(#e5e5e5, #dfdfdf);
     }
   }
 }

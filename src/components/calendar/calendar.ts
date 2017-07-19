@@ -61,18 +61,34 @@ export class Calendar {
         if (firstDay !== 7) { //星期日不用显示上个月
             let lastMonthStart = preMonthDays - firstDay + 1;// 从上个月几号开始
             for (let i = 0; i < firstDay; i++) {
-                this.dateArray.push({
-                    date: lastMonthStart + i,
-                    isThisMonth: false,
-                    isToday: false,
-                    isSelected: false,
-                })
+                if (month === 0) {
+                    this.dateArray.push({
+                        year: year,
+                        month: 11,
+                        date: lastMonthStart + i,
+                        isThisMonth: false,
+                        isToday: false,
+                        isSelected: false,
+                    })
+                } else {
+                    this.dateArray.push({
+                        year: year,
+                        month: month - 1,
+                        date: lastMonthStart + i,
+                        isThisMonth: false,
+                        isToday: false,
+                        isSelected: false,
+                    })
+                }
+
             }
         }
 
         // 将本月天数添加到数组中
         for (let i = 0; i < monthDays; i++) {
             this.dateArray.push({
+                year: year,
+                month: month,
                 date: i + 1,
                 isThisMonth: true,
                 isToday: false,
@@ -84,12 +100,26 @@ export class Calendar {
         if (this.dateArray.length % 7 !== 0) {
             let nextMonthAdd = 7 - this.dateArray.length % 7
             for (let i = 0; i < nextMonthAdd; i++) {
-                this.dateArray.push({
-                    date: i + 1,
-                    isThisMonth: false,
-                    isToday: false,
-                    isSelected: false,
-                })
+                if (month === 11) {
+                    this.dateArray.push({
+                        year: year,
+                        month: 0,
+                        date: i + 1,
+                        isThisMonth: false,
+                        isToday: false,
+                        isSelected: false,
+                    })
+                } else {
+                    this.dateArray.push({
+                        year: year,
+                        month: month + 1,
+                        date: i + 1,
+                        isThisMonth: false,
+                        isToday: false,
+                        isSelected: false,
+                    })
+                }
+
             }
         }
 
@@ -133,6 +163,8 @@ export class Calendar {
 
 // 日历的每个格子
 interface dateObj {
+    year: number,
+    month: number,
     date: number,//几号
     isThisMonth: boolean,//是否为当前选择的月份
     isToday: boolean,
