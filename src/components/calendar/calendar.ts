@@ -20,10 +20,11 @@ export class Calendar {
 
     displayMonth: number;
 
-    dateArray: Array<dateObj> = [];
+    dateArray: Array<dateObj> = []; // 本月展示的所有天
+
+    weekArray = [];// 保存日历每行的数组
 
     weekHead: string[] = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-    items: string[] = ['1', '2', '3', '4', '5', '6', '7'];
 
     constructor() {
         this.currentYear = moment().year();
@@ -35,43 +36,26 @@ export class Calendar {
         this.displayMonth = this.currentMonth;
     }
 
-    ngOnChanges() { console.log("ngOnChanges") }
-
     ngOnInit() {
-        console.log("ngOnInit");
-        console.log(this.currentYear);
-        console.log(this.currentMonth);
-        console.log(this.currentDate);
-        console.log(this.currentDay);
-        // 上个月天数
-        console.log(moment({
-            year: this.displayYear,
-            month: this.currentMonth - 1,
-        }).daysInMonth());
-        // 本月 1 号星期几
-        console.log(moment({
-            year: this.displayYear,
-            month: this.displayMonth,
-            date: 1,
-        }).day());
-        // 本月最后一天星期几
-        console.log(moment({
-            year: this.displayYear,
-            month: this.displayMonth,
-            date: moment({
-                year: this.displayYear,
-                month: this.displayMonth,
-            }).daysInMonth(),
-        }).day());
-
-        this.createMonth(this.displayYear, 2)
+        this.createMonth(this.displayYear, this.displayMonth)
     }
 
     createMonth(year: number, month: number) {
-        //当前选择月份的 1 号星期几,决定了上个月取出几天出来。星期日不用显示上个月，星期一显示上个月一天，星期二显示上个月两天
-        let firstDay = moment({ year: year, month: month, date: 1 }).day();
-        let preMonthDays = moment({ year: year, month: month - 1 }).daysInMonth();
-        let monthDays = moment({ year: year, month: month }).daysInMonth();
+        this.dateArray = [];// 清除上个月的数据
+        this.weekArray = [];// 
+        let firstDay;//当前选择月份的 1 号星期几,决定了上个月取出几天出来。星期日不用显示上个月，星期一显示上个月一天，星期二显示上个月两天
+        let preMonthDays;// 上个月的天数
+        let monthDays;// 当月的天数
+
+        firstDay = moment({ year: year, month: month, date: 1 }).day();
+        if (month === 0) {
+            console.log("in month 0")
+            preMonthDays = moment({ year: year - 1, month: 11 }).daysInMonth();
+        } else {
+            preMonthDays = moment({ year: year, month: month - 1 }).daysInMonth();
+        }
+
+        monthDays = moment({ year: year, month: month }).daysInMonth();
 
         // 将上个月的最后几天添加入数组
         if (firstDay !== 7) { //星期日不用显示上个月
@@ -96,7 +80,7 @@ export class Calendar {
             })
         }
 
-        // 将下个月天数添加到数组中
+        // 将下个月天数添加到数组中，有些月份显示 6 周，有些月份显示 5 周
         if (this.dateArray.length % 7 !== 0) {
             let nextMonthAdd = 7 - this.dateArray.length % 7
             for (let i = 0; i < nextMonthAdd; i++) {
@@ -109,30 +93,39 @@ export class Calendar {
             }
         }
 
-        console.log("createMonth: " + firstDay);
-        console.log(this.dateArray);
+        // 至此所有日期数据都被添加入 dateArray 数组中
 
-        // 至此所有日期数据都被添加入数组中
+        // 将日期数据按照每 7 天插入新的数组中
+        for (let i = 0; i < this.dateArray.length / 7; i++) {
+            let weekDays: Array<dateObj> = []
+            for (let j = 0; j < 7; j++) {
+                weekDays.push(this.dateArray[i * 7 + j]);
+            }
+            this.weekArray.push(weekDays);
+            weekDays = [];
+        }
     }
 
-    ngDoCheck() { console.log("ngDoCheck") }
-
-    ngAfterContentInit() { console.log("ngAfterContentInit") }
-
-    ngAfterContentChecked() { console.log("ngAfterContentChecked") }
-
-    ngAfterViewInit() { console.log("ngAfterViewInit") }
-
-    ngAfterViewChecked() { console.log("ngAfterViewChecked") }
-
-    ngOnDestroy() { console.log("ngOnDestroy") }
-
     back() {
-        console.log('back');
+        // 处理跨年的问题
+        if (this.displayMonth === 0) {
+            this.displayYear--;
+            this.displayMonth = 11;
+        } else {
+            this.displayMonth--;
+        }
+        this.createMonth(this.displayYear, this.displayMonth);
     }
 
     forward() {
-        console.log('forward');
+        // 处理跨年的问题
+        if (this.displayMonth === 11) {
+            this.displayYear++;
+            this.displayMonth = 0;
+        } else {
+            this.displayMonth++;
+        }
+        this.createMonth(this.displayYear, this.displayMonth);
     }
 
 
