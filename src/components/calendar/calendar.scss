@@ -17,6 +17,7 @@ ion-calendar {
       font-size: 1.8rem;
       border-left: 1px solid #ccc;
       border-top: 1px solid #ccc;
+      // box-shadow: 1px 1px 1px 1px #666 inset; today style
       &:last-child {
         border-right: 1px solid #ccc;
       }
