@@ -37,19 +37,28 @@ export class Calendar {
     }
 
     ngOnInit() {
-        this.createMonth(this.displayYear, this.displayMonth)
+        this.today()
+    }
+
+    // 跳转至今天
+    today() {
+        this.createMonth(this.displayYear, this.displayMonth);
+        // console.log(this.dateArray.map(function (ele, index) {
+        //     if (ele.isThisMonth === true && ele.date === this.currentDate) {
+        //         return index;
+        //     }
+        // }));
     }
 
     createMonth(year: number, month: number) {
         this.dateArray = [];// 清除上个月的数据
-        this.weekArray = [];// 
+        this.weekArray = [];// 清除数据
         let firstDay;//当前选择月份的 1 号星期几,决定了上个月取出几天出来。星期日不用显示上个月，星期一显示上个月一天，星期二显示上个月两天
         let preMonthDays;// 上个月的天数
         let monthDays;// 当月的天数
 
         firstDay = moment({ year: year, month: month, date: 1 }).day();
         if (month === 0) {
-            console.log("in month 0")
             preMonthDays = moment({ year: year - 1, month: 11 }).daysInMonth();
         } else {
             preMonthDays = moment({ year: year, month: month - 1 }).daysInMonth();
