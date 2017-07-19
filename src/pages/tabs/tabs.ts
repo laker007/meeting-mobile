@@ -12,7 +12,7 @@ export class TabsPage {
   tab3Root = 'MinePage';
 
   constructor() {
-    let now = moment("2017-7-15","YYYY-MM-DD").week();
+    let now = moment().daysInMonth();
     console.log(now);
   }
 }

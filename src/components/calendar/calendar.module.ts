@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { IonicPageModule, IonicModule } from 'ionic-angular';
+import { IonicModule } from 'ionic-angular';
 import { Calendar } from './calendar';
 @NgModule({
   declarations: [
