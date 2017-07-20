@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, IonicPage, ModalController } from 'ionic-angular';
 import { Calendar } from '../../components/calendar/calendar';
+import { HttpService } from '../../providers/http.service';
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -11,7 +12,8 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public http: HttpService,
   ) {
 
   }
@@ -26,7 +28,12 @@ export class HomePage {
     modal.present();
   }
 
-  onDaySelect(event) {
-    console.log(event);
+  onDaySelect(day) {
+    console.log(day);
+    this.http.get('http://localhost:3001/api/user').subscribe(
+      data => {
+        console.log(data);
+      }
+    )
   }
 }
