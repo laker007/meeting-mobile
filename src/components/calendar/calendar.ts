@@ -37,44 +37,19 @@ export class Calendar {
         this.currentDate = moment().date();
         this.currentDay = moment().day();
 
-        this.displayYear = this.currentYear;
-        this.displayMonth = this.currentMonth;
+        // this.displayYear = this.currentYear;
+        // this.displayMonth = this.currentMonth;
     }
 
     ngOnInit() {
         this.today()
     }
 
-    // ngOnChanges() {
-    //     console.log("ngOnChanges")
-    // }
-
-    // ngDoCheck() {
-    //     console.log("ngDoCheck")
-    // }
-
-    // ngAfterContentInit() {
-    //     console.log("ngAfterContentInit")
-    // }
-
-    // ngAfterContentChecked() {
-    //     console.log("ngAfterContentChecked")
-    // }
-
-    // ngAfterViewInit() {
-    //     console.log("ngAfterViewInit")
-    // }
-
-    // ngAfterViewChecked() {
-    //     console.log("ngAfterViewChecked")
-    // }
-
     // 跳转至今天
     today() {
+        this.displayYear = this.currentYear;
+        this.displayMonth = this.currentMonth;
         this.createMonth(this.currentYear, this.currentMonth);
-
-
-        console.log(this.dateArray);
 
         // 将今天标记为选择状态
         let todayIndex = _.findIndex(this.dateArray, {

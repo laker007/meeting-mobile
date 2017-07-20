@@ -10,7 +10,7 @@
     <ion-title>会议预约</ion-title>
 
     <ion-buttons end>
-      <button ion-button clear>
+      <button ion-button clear (click)="today()">
         今天
       </button>
     </ion-buttons>
@@ -18,6 +18,6 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-calendar></ion-calendar>
 </ion-content>
