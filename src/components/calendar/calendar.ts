@@ -195,7 +195,7 @@ export class Calendar {
     daySelect(day, i, j) {
         // 首先将上次点击的状态清除
         this.dateArray[this.lastSelected].isSelected = false;
-
+        // 保存本次点击的项
         this.lastSelected = i * 7 + j;
         this.dateArray[i * 7 + j].isSelected = true;
     }

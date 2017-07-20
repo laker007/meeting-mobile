@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import * as moment from 'moment';
 import { IonicPage } from 'ionic-angular';
 @IonicPage()
 @Component({
@@ -11,8 +10,5 @@ export class TabsPage {
   tab2Root = 'NoticePage';
   tab3Root = 'MinePage';
 
-  constructor() {
-    let now = moment().daysInMonth();
-    console.log(now);
-  }
+  constructor() { }
 }
