@@ -4,28 +4,37 @@ ion-calendar {
     text-align: center;
   }
   .calendar-header-col {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #666;
   }
   .calendar-row {
     &:last-child {
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid #eee;
     }
     .calendar-col {
       display: flex;
       justify-content: center;
-      padding: 1rem;
-      font-size: 1.8rem;
-      border-left: 1px solid #ccc;
-      border-top: 1px solid #ccc;
-      // box-shadow: 1px 1px 1px 1px #666 inset; today style
+      padding: 0.8rem;
+      font-size: 1.2rem;
+      border-left: 1px solid #eee;
+      border-top: 1px solid #eee; //
       &:last-child {
-        border-right: 1px solid #ccc;
+        border-right: 1px solid #eee;
       }
     }
-    .not-this-month{
+    .not-this-month {
       color: #fff;
-      background:linear-gradient(#e5e5e5, #dfdfdf);
+      background: linear-gradient(#e5e5e5, #dfdfdf);
+    }
+    .today {
+      color: #fff;
+      box-shadow: 1px 1px 1px 1px #aaa inset; //today style
+      background: radial-gradient(#c5c5c5, #c8c8c8, #ccc);
+    }
+    .select {
+      box-shadow: none;
+      color: #fff;
+      background: radial-gradient(#5c7eda, #5e89ec, #5e89ec);
     }
   }
 }

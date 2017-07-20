@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import * as moment from 'moment';
+import * as _ from "lodash";
 
 @Component({
     selector: 'ion-calendar',
@@ -20,11 +21,15 @@ export class Calendar {
 
     displayMonth: number;
 
-    dateArray: Array<dateObj> = []; // 本月展示的所有天
+    dateArray: Array<dateObj> = []; // 本月展示的所有天的数组
 
     weekArray = [];// 保存日历每行的数组
 
+    lastSelected: number = 0; // 记录上次点击的位置
+
     weekHead: string[] = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+
+
 
     constructor() {
         this.currentYear = moment().year();
@@ -40,14 +45,47 @@ export class Calendar {
         this.today()
     }
 
+    // ngOnChanges() {
+    //     console.log("ngOnChanges")
+    // }
+
+    // ngDoCheck() {
+    //     console.log("ngDoCheck")
+    // }
+
+    // ngAfterContentInit() {
+    //     console.log("ngAfterContentInit")
+    // }
+
+    // ngAfterContentChecked() {
+    //     console.log("ngAfterContentChecked")
+    // }
+
+    // ngAfterViewInit() {
+    //     console.log("ngAfterViewInit")
+    // }
+
+    // ngAfterViewChecked() {
+    //     console.log("ngAfterViewChecked")
+    // }
+
     // 跳转至今天
     today() {
-        this.createMonth(this.displayYear, this.displayMonth);
-        // console.log(this.dateArray.map(function (ele, index) {
-        //     if (ele.isThisMonth === true && ele.date === this.currentDate) {
-        //         return index;
-        //     }
-        // }));
+        this.createMonth(this.currentYear, this.currentMonth);
+
+
+        console.log(this.dateArray);
+
+        // 将今天标记为选择状态
+        let todayIndex = _.findIndex(this.dateArray, {
+            year: this.currentYear,
+            month: this.currentMonth,
+            date: this.currentDate,
+            isThisMonth: true
+        })
+        this.lastSelected = todayIndex;
+        this.dateArray[todayIndex].isSelected = true;
+
     }
 
     createMonth(year: number, month: number) {
@@ -56,14 +94,16 @@ export class Calendar {
         let firstDay;//当前选择月份的 1 号星期几,决定了上个月取出几天出来。星期日不用显示上个月，星期一显示上个月一天，星期二显示上个月两天
         let preMonthDays;// 上个月的天数
         let monthDays;// 当月的天数
+        let weekDays: Array<dateObj> = [];
 
         firstDay = moment({ year: year, month: month, date: 1 }).day();
+        // 上个月天数
         if (month === 0) {
             preMonthDays = moment({ year: year - 1, month: 11 }).daysInMonth();
         } else {
             preMonthDays = moment({ year: year, month: month - 1 }).daysInMonth();
         }
-
+        // 本月天数
         monthDays = moment({ year: year, month: month }).daysInMonth();
 
         // 将上个月的最后几天添加入数组
@@ -105,6 +145,16 @@ export class Calendar {
             })
         }
 
+        if (this.currentYear === year && this.currentMonth === month) {
+            let todayIndex = _.findIndex(this.dateArray, {
+                year: this.currentYear,
+                month: this.currentMonth,
+                date: this.currentDate,
+                isThisMonth: true
+            })
+            this.dateArray[todayIndex].isToday = true;
+        }
+
         // 将下个月天数添加到数组中，有些月份显示 6 周，有些月份显示 5 周
         if (this.dateArray.length % 7 !== 0) {
             let nextMonthAdd = 7 - this.dateArray.length % 7
@@ -136,7 +186,6 @@ export class Calendar {
 
         // 将日期数据按照每 7 天插入新的数组中
         for (let i = 0; i < this.dateArray.length / 7; i++) {
-            let weekDays: Array<dateObj> = []
             for (let j = 0; j < 7; j++) {
                 weekDays.push(this.dateArray[i * 7 + j]);
             }
@@ -167,7 +216,14 @@ export class Calendar {
         this.createMonth(this.displayYear, this.displayMonth);
     }
 
+    // 选择某日期，点击事件
+    daySelect(day, i, j) {
+        // 首先将上次点击的状态清除
+        this.dateArray[this.lastSelected].isSelected = false;
 
+        this.lastSelected = i * 7 + j;
+        this.dateArray[i * 7 + j].isSelected = true;
+    }
 }
 
 // 日历的每个格子
@@ -176,6 +232,6 @@ interface dateObj {
     month: number,
     date: number,//几号
     isThisMonth: boolean,//是否为当前选择的月份
-    isToday: boolean,
-    isSelected: boolean,
+    isToday?: boolean,
+    isSelected?: boolean,
 }
