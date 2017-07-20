@@ -16,7 +16,17 @@ export class HomePage {
 
   }
 
-  today(){
+  today() {
     this.calendar.today();
+  }
+
+  reserve() {
+    // Todo: 检查登录状态，未登录弹出登录模态框
+    let modal = this.modalCtrl.create('ReservePage');
+    modal.present();
+  }
+
+  onDaySelect(event) {
+    console.log(event);
   }
 }

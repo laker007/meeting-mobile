@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 import * as _ from "lodash";
 
@@ -8,6 +8,8 @@ import * as _ from "lodash";
 })
 
 export class Calendar {
+
+    @Output() onDaySelect = new EventEmitter<dateObj>();
 
     currentYear: number;
 
@@ -25,7 +27,7 @@ export class Calendar {
 
     weekArray = [];// 保存日历每行的数组
 
-    lastSelected: number = 0; // 记录上次点击的位置
+    lastSelect: number = 0; // 记录上次点击的位置
 
     weekHead: string[] = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
 
@@ -58,9 +60,10 @@ export class Calendar {
             date: this.currentDate,
             isThisMonth: true
         })
-        this.lastSelected = todayIndex;
-        this.dateArray[todayIndex].isSelected = true;
+        this.lastSelect = todayIndex;
+        this.dateArray[todayIndex].isSelect = true;
 
+        this.onDaySelect.emit(this.dateArray[todayIndex]);
     }
 
     createMonth(year: number, month: number) {
@@ -92,7 +95,7 @@ export class Calendar {
                         date: lastMonthStart + i,
                         isThisMonth: false,
                         isToday: false,
-                        isSelected: false,
+                        isSelect: false,
                     })
                 } else {
                     this.dateArray.push({
@@ -101,7 +104,7 @@ export class Calendar {
                         date: lastMonthStart + i,
                         isThisMonth: false,
                         isToday: false,
-                        isSelected: false,
+                        isSelect: false,
                     })
                 }
 
@@ -116,7 +119,7 @@ export class Calendar {
                 date: i + 1,
                 isThisMonth: true,
                 isToday: false,
-                isSelected: false,
+                isSelect: false,
             })
         }
 
@@ -141,7 +144,7 @@ export class Calendar {
                         date: i + 1,
                         isThisMonth: false,
                         isToday: false,
-                        isSelected: false,
+                        isSelect: false,
                     })
                 } else {
                     this.dateArray.push({
@@ -150,7 +153,7 @@ export class Calendar {
                         date: i + 1,
                         isThisMonth: false,
                         isToday: false,
-                        isSelected: false,
+                        isSelect: false,
                     })
                 }
 
@@ -194,10 +197,12 @@ export class Calendar {
     // 选择某日期，点击事件
     daySelect(day, i, j) {
         // 首先将上次点击的状态清除
-        this.dateArray[this.lastSelected].isSelected = false;
+        this.dateArray[this.lastSelect].isSelect = false;
         // 保存本次点击的项
-        this.lastSelected = i * 7 + j;
-        this.dateArray[i * 7 + j].isSelected = true;
+        this.lastSelect = i * 7 + j;
+        this.dateArray[i * 7 + j].isSelect = true;
+
+        this.onDaySelect.emit(day);
     }
 }
 
@@ -208,5 +213,5 @@ interface dateObj {
     date: number,//几号
     isThisMonth: boolean,//是否为当前选择的月份
     isToday?: boolean,
-    isSelected?: boolean,
+    isSelect?: boolean,
 }
