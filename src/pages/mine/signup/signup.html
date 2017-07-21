@@ -12,11 +12,22 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-left></ion-icon>
-      @ionicframework
-    </ion-item>
-  </ion-list>
+  <form (submit)="signup()" [formGroup]="signupForm">
+    <ion-list>
+
+      <ion-item>
+        <ion-input formControlName="username" type="text" placeholder="Username"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <div padding>
+      <button type="submit" ion-button color="primary" block>注册</button>
+    </div>
+  </form>
+
 </ion-content>
