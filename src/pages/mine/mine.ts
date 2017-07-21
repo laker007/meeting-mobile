@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, ModalController } from 'ionic-angular';
 @IonicPage()
 @Component({
     selector: 'page-mine',
@@ -7,5 +7,17 @@ import { IonicPage } from 'ionic-angular';
 })
 
 export class MinePage {
+    constructor(
+        public modalCtrl: ModalController,
+    ) { }
 
+    login() {
+        let login = this.modalCtrl.create('LoginPage');
+        login.present();
+    }
+
+    signup() {
+        let signup = this.modalCtrl.create('SignupPage');
+        signup.present();
+    }
 }

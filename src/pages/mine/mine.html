@@ -9,13 +9,22 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-thumbnail item-start>
+      <!-- <ion-thumbnail item-start>
         <img src="assets/img/unsign.jpg">
-      </ion-thumbnail>
-      <h2>My Neighbor Totoro</h2>
-      <p>Hayao Miyazaki • 1988</p>
-      <button ion-button clear>登录/注册</button>
-      <button ion-button clear>登录/注册</button>
+      </ion-thumbnail> 
+       <h2>My Neighbor Totoro</h2>
+      <p>Hayao Miyazaki • 1988</p>  -->
+      <ion-grid>
+        <ion-row justify-content-around>
+          <ion-col col-auto>
+            <button (click)="login()" ion-button round color="secondary">登录</button>
+          </ion-col>
+          <ion-col col-auto>
+            <button (click)="signup()" ion-button round color="danger">注册</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </ion-item>
   </ion-list>
 
