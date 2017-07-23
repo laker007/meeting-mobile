@@ -1,10 +1,10 @@
 <ion-header>
   <ion-navbar>
-      <ion-buttons start>
-          <button ion-button clear (click)="dismiss()">
+    <ion-buttons start>
+      <button ion-button clear (click)="dismiss()">
             取消
           </button>
-      </ion-buttons>
+    </ion-buttons>
     <ion-title>
       新增会议预约
     </ion-title>
@@ -13,10 +13,19 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
     <ion-item>
-      <ion-icon name="ionic" item-left></ion-icon>
-      @ionicframework
+      <ion-label>日期</ion-label>
+      <ion-datetime displayFormat="MM 月 DD 日" pickerFormat="MM DD"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>开始时间</ion-label>
+      <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" minuteValues="0,15,30,45"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>结束时间</ion-label>
+      <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm"></ion-datetime>
     </ion-item>
   </ion-list>
 </ion-content>
